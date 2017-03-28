@@ -1,0 +1,22 @@
+filebeat.prospectors:
+ - input_type: log
+   paths:
+     - /root/avatarui/avatar-ui/logs/avatar-ui.json
+     - /root/avatarui/avatar-ui/logs/avatar-ui.*.json
+     - /root/avatarui/avatar-ui/logs/avatar-ui-access.json
+     - /root/avatarui/avatar-ui/logs/avatar-ui-access.*.json
+   fields:
+      log_type: log
+   fields_under_root: true
+#   ignore_older: 5m
+#   tail_files: true
+   tags: ["json"]
+   json.message_key: "@timestamp"
+   json.keys_under_root: true
+   json.add_error_key: true
+
+output.elasticsearch:
+   index: avatar-log-%{+YYYY.MM.dd}
+   hosts: ["elasticsearch:9200", "elasticsearch2:9200"]
+   template:
+      overwrite: true
