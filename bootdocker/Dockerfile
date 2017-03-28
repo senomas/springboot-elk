@@ -16,4 +16,4 @@ RUN add-apt-repository ppa:webupd8team/java && \
 WORKDIR /root
 ADD springboot.sh /root/springboot.sh
 
-ENTRYPOINT ["/root/springboot.sh"
+ENTRYPOINT ["/root/springboot.sh"]

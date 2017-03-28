@@ -16,7 +16,7 @@ filebeat.prospectors:
    json.add_error_key: true
 
 output.elasticsearch:
-   index: avatar-log-%{+YYYY.MM.dd}
+   index: app-log-%{+YYYY.MM.dd}
    hosts: ["elasticsearch:9200", "elasticsearch2:9200"]
    template:
       overwrite: true
