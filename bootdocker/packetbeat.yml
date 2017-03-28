@@ -115,7 +115,7 @@ packetbeat.protocols.nfs:
 #-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
-  index: packet-%{+YYYY.MM.dd}
+  index: bootapp-packet-%{+YYYY.MM.dd}
   hosts: ["elasticsearch:9200", "elasticsearch2:9200"]
 
   # Optional protocol and basic auth credentials.
