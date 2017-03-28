@@ -1,0 +1,7 @@
+.recommenders
+*/.settings
+*/.classpath
+*/.project
+*/target
+*/logs
+RemoteSystemsTempFiles

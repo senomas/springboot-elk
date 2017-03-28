@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} {%X} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>logs/log.json</File>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp />
+                <version />
+                <loggerName />
+                <threadName />
+                <logLevel />
+                <logLevelValue />
+                <mdc />
+                <tags />
+                <message />
+                <logstashMarkers />
+                <arguments />
+                <stackTrace>
+                    <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                        <maxDepthPerThrowable>30</maxDepthPerThrowable>
+                        <maxLength>2048</maxLength>
+                        <shortenedClassNameLength>20</shortenedClassNameLength>
+                        <exclude>sun\.reflect\..*\.invoke.*</exclude>
+                        <exclude>net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+                        <rootCauseFirst>true</rootCauseFirst>
+                    </throwableConverter>
+                </stackTrace>
+            </providers>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                logs/log.%d{yyyy-MM-dd}.%i.json.bak
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>30MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <logger name="org.springframework.security" level="DEBUG" additivity="false">
+        <appender-ref ref="logstash" />
+    </logger>
+    <!-- <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="logstash" />
+    </logger> -->
+    <logger name="org.hibernate.stat" level="DEBUG" additivity="false">
+        <appender-ref ref="logstash" />
+    </logger>
+    <!-- <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
+        <appender-ref ref="logstash" />
+    </logger> -->
+    <logger name="org.springframework.orm.jpa" level="DEBUG" additivity="false">
+        <appender-ref ref="logstash" />
+    </logger>
+    <logger name="com.senomas" level="DEBUG" additivity="false">
+        <appender-ref ref="logstash" />
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="logstash" />
+        <appender-ref ref="stdout" />
+    </root>
+</configuration>
