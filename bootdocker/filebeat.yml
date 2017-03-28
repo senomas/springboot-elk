@@ -1,10 +1,8 @@
 filebeat.prospectors:
  - input_type: log
    paths:
-     - /root/avatarui/avatar-ui/logs/avatar-ui.json
-     - /root/avatarui/avatar-ui/logs/avatar-ui.*.json
-     - /root/avatarui/avatar-ui/logs/avatar-ui-access.json
-     - /root/avatarui/avatar-ui/logs/avatar-ui-access.*.json
+     - /root/boot/bootdocker/logs/log.json
+     - /root/boot/bootdocker/logs/log.*.json
    fields:
       log_type: log
    fields_under_root: true
