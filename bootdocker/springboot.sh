@@ -1,23 +1,24 @@
 #!/bin/bash
-if [ -d /root/app/.git ]; then 
-    cd /root/app
+if [ -d /root/boot/.git ]; then 
+    cd /root/boot
     git pull
 else 
     cd /root
     git clone --progress ${GIT_REPO:-https://example.com/demo.git} boot
+    cd boot
 fi
 
-cp boot/bootdocker/filebeat.yml /etc/filebeat/
-cp boot/bootdocker/filebeat.template.json /etc/filebeat/
-cp boot/bootdocker/filebeat.template-es2x.json /etc/filebeat/
+cp bootdocker/filebeat.yml /etc/filebeat/
+cp bootdocker/filebeat.template.json /etc/filebeat/
+cp bootdocker/filebeat.template-es2x.json /etc/filebeat/
 
-cp boot/bootdocker/packetbeat.yml /etc/packetbeat/
-cp boot/bootdocker/packetbeat.template.json /etc/packetbeat/
-cp boot/bootdocker/packetbeat.template-es2x.json /etc/packetbeat/
+cp bootdocker/packetbeat.yml /etc/packetbeat/
+cp bootdocker/packetbeat.template.json /etc/packetbeat/
+cp bootdocker/packetbeat.template-es2x.json /etc/packetbeat/
 
 service packetbeat start
 service filebeat start
 
-cd boot/${BOOT_APP:-app}
+cd ${BOOT_APP:-app}
 
 mvn spring-boot:run ${BOOT_PARAMS}

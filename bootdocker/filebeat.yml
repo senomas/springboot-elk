@@ -1,8 +1,8 @@
 filebeat.prospectors:
  - input_type: log
    paths:
-     - /root/boot/bootdocker/logs/log.json
-     - /root/boot/bootdocker/logs/log.*.json
+     - /root/boot/app/logs/log.json
+     - /root/boot/app/logs/log.*.json
    fields:
       log_type: log
    fields_under_root: true
