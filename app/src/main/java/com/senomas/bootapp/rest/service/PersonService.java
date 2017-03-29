@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.senomas.bootapp.rest.domain.Person;
+import com.senomas.bootapp.rest.domain.PersonSpecification;
 import com.senomas.bootapp.rest.repository.PersonRepository;
 
 @Service
@@ -18,18 +19,20 @@ public class PersonService {
 
 	@Transactional(readOnly = true)
 	public Page<Person> findAll(Pageable pageable) {
-		
 		return repository.findAll(pageable);
 	}
 	
 	@Transactional(readOnly = true)
+	public Page<Person> findAll(PersonSpecification spec, Pageable pageable) {
+		return repository.findAll(spec, pageable);
+	}
+	
+	@Transactional(readOnly = true)
 	public Person findOne(Long id) {
-		
 		return repository.findOne(id);
 	}
 	
 	public Person save(Person person) {
-		
 		return repository.saveAndFlush(person);
 	}
 }

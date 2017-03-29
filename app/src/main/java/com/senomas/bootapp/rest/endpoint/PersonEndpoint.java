@@ -1,5 +1,7 @@
 package com.senomas.bootapp.rest.endpoint;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senomas.bootapp.rest.domain.Person;
+import com.senomas.bootapp.rest.domain.PersonFilter;
+import com.senomas.bootapp.rest.domain.PersonSpecification;
 import com.senomas.bootapp.rest.service.PersonService;
 
 import io.swagger.annotations.ApiOperation;
@@ -44,12 +48,18 @@ public class PersonEndpoint extends BaseEndpoint {
 	@Autowired
 	PersonService personService;
 
-	@RequestMapping(path = "/api/v1/persons", method = RequestMethod.GET)
+	@RequestMapping(path = "/api/v1/persons", method = RequestMethod.GET, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
 	@ApiOperation(value = "Get all persons", notes = "Returns first N persons specified by the size parameter with page offset specified by page parameter.", response = Page.class)
 	public Page<Person> getAll(
 			@ApiParam("The size of the page to be returned") @RequestParam(required = false) Integer size,
 			@ApiParam("Zero-based page index") @RequestParam(required = false) Integer page,
-			@ApiParam("Sorts") @RequestParam(required = false) String sorts[]) {
+			@ApiParam("Sorts") @RequestParam(required = false) String sorts[],
+			@ApiParam("Filter firstName") @RequestParam(required = false) String filter_firstName,
+			@ApiParam("Filter lastName") @RequestParam(required = false) String filter_lastName,
+			@ApiParam("Filter middleName") @RequestParam(required = false) String filter_middleName,
+			@ApiParam("Filter dateOfBirthStart (2017-03-29T09:53:45.445Z)") @RequestParam(required = false) Date filter_dateOfBirthStart,
+			@ApiParam("Filter dateOfBirthEnd (2017-03-29T09:53:45.445Z)") @RequestParam(required = false) Date filter_dateOfBirthEnd) {
 		if (size == null) {
 			size = DEFAULT_PAGE_SIZE;
 		}
@@ -59,7 +69,7 @@ public class PersonEndpoint extends BaseEndpoint {
 		Pageable pageable;
 		if (sorts != null && sorts.length > 0) {
 			Sort.Order orders[] = new Sort.Order[sorts.length];
-			for (int i=0, il=orders.length; i<il; i++) {
+			for (int i = 0, il = orders.length; i < il; i++) {
 				String sort = sorts[i].trim();
 				if (sort.startsWith("!")) {
 					orders[i] = new Sort.Order(Direction.DESC, sort.substring(1));
@@ -71,8 +81,10 @@ public class PersonEndpoint extends BaseEndpoint {
 		} else {
 			pageable = new PageRequest(page, size);
 		}
-		Page<Person> persons = personService.findAll(pageable);
-
+		PersonFilter filter = new PersonFilter(filter_firstName, filter_lastName, filter_middleName,
+				filter_dateOfBirthStart, filter_dateOfBirthEnd);
+		PersonSpecification spec = new PersonSpecification(filter);
+		Page<Person> persons = personService.findAll(spec, pageable);
 		return persons;
 	}
 
@@ -80,7 +92,6 @@ public class PersonEndpoint extends BaseEndpoint {
 	@ApiOperation(value = "Get person by id", notes = "Returns person for id specified.", response = Person.class)
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "Person not found") })
 	public ResponseEntity<Person> get(@ApiParam("Person id") @PathVariable("id") Long id) {
-
 		Person person = personService.findOne(id);
 		return (person == null ? ResponseEntity.status(HttpStatus.NOT_FOUND) : ResponseEntity.ok()).body(person);
 	}
@@ -91,7 +102,6 @@ public class PersonEndpoint extends BaseEndpoint {
 	public ResponseEntity<Person> add(@Valid @RequestBody Person person,
 			@Valid @Size(max = 40, min = 8, message = "user id size 8-40") @RequestHeader(name = HEADER_USER_ID) String userId,
 			@Valid @Size(max = 40, min = 2, message = "token size 2-40") @RequestHeader(name = HEADER_TOKEN, required = false) String token) {
-
 		person = personService.save(person);
 		return ResponseEntity.ok().body(person);
 	}
