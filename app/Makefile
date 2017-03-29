@@ -1,2 +1,2 @@
 run:
-	mvn spring-boot:run -Dspring.active.profiles=demo
+	mvn spring-boot:run -Dspring.profiles.active=demo

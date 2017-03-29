@@ -15,10 +15,14 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Data;
 
 @Entity
 @Data
+@JsonInclude(Include.NON_NULL)
 public class Person {
 
     @Id
