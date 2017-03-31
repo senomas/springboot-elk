@@ -10,7 +10,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<boot.version>1.4.4.RELEASE</boot.version>
+		<boot.version>1.4.5.RELEASE</boot.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +42,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<version>${boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.10</version>
 		</dependency>
 
 		<dependency>

@@ -1,0 +1,102 @@
+[
+  {
+    "_id": "1ce20880-143f-11e7-9eb2-6332495d1b2a",
+    "_type": "search",
+    "_source": {
+      "title": "HTTP",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bootapp-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"bootapp-*\",\"key\":\"type\",\"value\":\"http\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"type\":{\"query\":\"http\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "e75ba1e0-15dc-11e7-ac07-b9a7d775d109",
+    "_type": "search",
+    "_source": {
+      "title": "PGSQL",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bootapp-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"type\",\"negate\":false,\"value\":\"pgsql\"},\"query\":{\"match\":{\"type\":{\"query\":\"pgsql\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"must_not\\\":[{\\\"match_phrase\\\":{\\\"query\\\":\\\"SELECT 1\\\"}},{\\\"regexp\\\":{\\\"query\\\":\\\"_.*\\\"}}]}}\"},\"query\":{\"bool\":{\"must_not\":[{\"match_phrase\":{\"query\":\"SELECT 1\"}},{\"regexp\":{\"query\":\"_.*\"}}]}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "50e156f0-1533-11e7-ac07-b9a7d775d109",
+    "_type": "visualization",
+    "_source": {
+      "title": "HTTP Histogram",
+      "visState": "{\"title\":\"HTTP Histogram\",\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"legendPosition\":\"right\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"times\":[]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":false,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"http.response.code\",\"size\":5,\"order\":\"asc\",\"orderBy\":\"_term\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "1ce20880-143f-11e7-9eb2-6332495d1b2a",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "013caa20-15e0-11e7-a1e8-ffdb21243c7c",
+    "_type": "visualization",
+    "_source": {
+      "title": "HTTP Response Code",
+      "visState": "{\"title\":\"HTTP Response Code\",\"type\":\"pie\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"http.response.code\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "1ce20880-143f-11e7-9eb2-6332495d1b2a",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "98f888f0-15dd-11e7-ac07-b9a7d775d109",
+    "_type": "visualization",
+    "_source": {
+      "title": "PGSQL Performance",
+      "visState": "{\"title\":\"PGSQL Performance\",\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"legendPosition\":\"right\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"times\":[]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"responsetime\",\"interval\":50,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"query.keyword\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "e75ba1e0-15dc-11e7-ac07-b9a7d775d109",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "4b7de950-15e0-11e7-a1e8-ffdb21243c7c",
+    "_type": "visualization",
+    "_source": {
+      "title": "HTTP Performance",
+      "visState": "{\"title\":\"HTTP Performance\",\"type\":\"histogram\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"responsetime\",\"interval\":50,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"path.keyword\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "1ce20880-143f-11e7-9eb2-6332495d1b2a",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]
