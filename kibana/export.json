@@ -15,7 +15,7 @@
       ],
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bootapp-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"bootapp-*\",\"key\":\"type\",\"value\":\"http\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"type\":{\"query\":\"http\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+        "searchSourceJSON": "{\"index\":\"bootapp-packet-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"type\",\"negate\":false,\"value\":\"http\"},\"query\":{\"match\":{\"type\":{\"query\":\"http\",\"type\":\"phrase\"}}}}]}"
       }
     }
   },
@@ -35,7 +35,7 @@
       ],
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bootapp-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"type\",\"negate\":false,\"value\":\"pgsql\"},\"query\":{\"match\":{\"type\":{\"query\":\"pgsql\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"must_not\\\":[{\\\"match_phrase\\\":{\\\"query\\\":\\\"SELECT 1\\\"}},{\\\"regexp\\\":{\\\"query\\\":\\\"_.*\\\"}}]}}\"},\"query\":{\"bool\":{\"must_not\":[{\"match_phrase\":{\"query\":\"SELECT 1\"}},{\"regexp\":{\"query\":\"_.*\"}}]}}}]}"
+        "searchSourceJSON": "{\"index\":\"bootapp-packet-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"type\",\"negate\":false,\"value\":\"pgsql\"},\"query\":{\"match\":{\"type\":{\"query\":\"pgsql\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"bootapp-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"must_not\\\":[{\\\"match_phrase\\\":{\\\"query\\\":\\\"SELECT 1\\\"}},{\\\"regexp\\\":{\\\"query\\\":\\\"_.*\\\"}}]}}\"},\"query\":{\"bool\":{\"must_not\":[{\"match_phrase\":{\"query\":\"SELECT 1\"}},{\"regexp\":{\"query\":\"_.*\"}}]}}}]}"
       }
     }
   },
