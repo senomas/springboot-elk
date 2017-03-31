@@ -1,6 +1,5 @@
 package com.senomas.bootapp.rest;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -27,11 +26,12 @@ public class DataSourceStat {
 
 			@Override
 			public void afterQuery(ExecutionInfo execInfo, List<QueryInfo> queryInfoList) {
-				List<String> queries = new LinkedList<>();
+				StringBuilder query = new StringBuilder();
 				for (QueryInfo qi : queryInfoList) {
-					queries.add(qi.getQuery());
+					if (query.length() > 0) query.append('\n');
+					query.append(qi.getQuery());
 				}
-				log.info("{} {}", StructuredArguments.kv("queries", queries),
+				log.info("{} {}", StructuredArguments.kv("query", query),
 						StructuredArguments.kv("responsetime", execInfo.getElapsedTime()),
 						StructuredArguments.kv("success", execInfo.isSuccess()),
 						StructuredArguments.kv("batch", execInfo.isBatch()),
