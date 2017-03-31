@@ -1,0 +1,26 @@
+version: '2'
+services:
+   bootdb:
+      image: postgres
+      networks:
+         - elknet
+      ports:
+         - "5432:5432"
+      environment:
+         - POSTGRES_PASSWORD=dodol123
+   bootapp:
+      build: .
+      networks:
+         - elknet
+      networks:
+         - elknet
+      ports:
+         - "8081:8080"
+      volumes:
+         - ./mvn-repo/:/root/.m2/repository
+      environment:
+         - GIT_REPO=https://github.com/senomas/springboot-elk.git
+         - BOOT_PARAMS=-Dspring.profiles.active=demo
+networks: 
+   elknet:
+      external: true

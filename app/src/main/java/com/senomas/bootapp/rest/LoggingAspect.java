@@ -12,19 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Slf4j
 public class LoggingAspect {
-    @Pointcut("@target(org.springframework.stereotype.Repository)")
-    public void repositoryMethods() {
-    }
 
     @Pointcut("@annotation(com.senomas.bootapp.rest.Loggable)")
     public void loggableMethods() {
-    }
-
-    @Before("repositoryMethods()")
-    public void logMethodCall(JoinPoint jp) {
-    	String typeName = jp.getSignature().getDeclaringTypeName();
-        String methodName = jp.getSignature().getName();
-        log.info("REPO-ENTER "+typeName+"."+methodName);
     }
 
     @Before("loggableMethods()")

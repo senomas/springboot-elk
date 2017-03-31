@@ -4,6 +4,7 @@ if [ -d /root/boot/.git ]; then
     git pull
 else 
     cd /root
+    echo "git clone --progress ${GIT_REPO:-https://example.com/demo.git} boot"
     git clone --progress ${GIT_REPO:-https://example.com/demo.git} boot
     cd boot
 fi
