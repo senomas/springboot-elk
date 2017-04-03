@@ -25,10 +25,8 @@ public class Address {
 	private Long id;
 
 	@NotNull
- 	private String line1;
+ 	private String street;
 
-	private String line2;
-	
 	@NotNull
 	private String city;
 	
@@ -38,8 +36,8 @@ public class Address {
 	@NotNull
 	private String zip;
 
-	public Address(String line1, String city, String state, String zip) {
-		this.line1 = line1;
+	public Address(String street, String city, String state, String zip) {
+		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
