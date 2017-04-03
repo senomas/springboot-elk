@@ -1,6 +1,6 @@
 package com.senomas.bootapp.rest;
 
-import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.github.javafaker.Faker;
 import com.senomas.bootapp.rest.domain.Address;
 import com.senomas.bootapp.rest.domain.Person;
 import com.senomas.bootapp.rest.domain.Person.Gender;
@@ -37,11 +38,13 @@ public class InitDemoData {
 		tt.execute(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus arg0) {
-				for (int i=1; i<67; i++) {
-					Person p = new Person("demo"+i, "last"+i);
-					p.setGender(Gender.M);
-					p.setDateOfBirth(new Date());
-					p.addAddress(new Address("line"+i, "jakarta", "jakarta", "128"+i));
+				for (int i=1; i<567; i++) {
+					Faker faker = new Faker();
+					
+					Person p = new Person(faker.name().firstName(), faker.name().lastName());
+					p.setGender(faker.bool().bool() ? Gender.M : Gender.F);
+					p.setDateOfBirth(faker.date().past(30000, TimeUnit.DAYS));
+					p.addAddress(new Address(faker.address().streetName(), faker.address().city(), faker.address().state(), faker.address().zipCode()));
 					personRepository.save(p);
 				}
 			}
